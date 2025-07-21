@@ -33,6 +33,7 @@ public class FileWriter {
 
             } catch (IOException e) {
                 System.err.println("Ошибка записи в файл " + filename + ": " + e.getMessage());
+                throw  new RuntimeException(e);
             }
         });
     }
