@@ -1,5 +1,7 @@
 package com.example;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class DataFilter {
@@ -20,6 +22,39 @@ public class DataFilter {
         this.appendToFiles = appendToFiles;
         this.shortStats = shortStats;
         this.FullStats = FullStats;
+    }
+
+    public void dataSort() {
+        HashMap<String, List<String>> dataMap = new HashMap<>();
+        List<String> integersList = new ArrayList<>();
+        List<String> floatsList = new ArrayList<>();
+        List<String> stringsList = new ArrayList<>();
+        for (String item : dataFromFile) {
+            if (isNumber(item)) {
+                if (isFloat(item)) {
+                    floatsList.add(item);
+                } else {
+                    integersList.add(item);
+                }
+            } else {
+                stringsList.add(item);
+            }
+        }
+        dataMap.put("integer", integersList);
+        dataMap.put("float", floatsList);
+        dataMap.put("string", stringsList);
+        FileWriter fileWriter = new FileWriter();
+        fileWriter.fileWrite(dataMap, prefixFiles, pathToResult, appendToFiles);
+    }
+
+    private static boolean isNumber(String s) {
+        if (s == null || s.isEmpty()) return false;
+        String numberRegex = "-?\\d+(\\.\\d+)?([eE][-+]?\\d+)?";
+        return s.matches(numberRegex);
+    }
+
+    private static boolean isFloat(String s) {
+        return s.contains(".") || s.toLowerCase().contains("e");
     }
 
     public List<String> getDataFromFile() {

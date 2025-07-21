@@ -34,7 +34,6 @@ public class DataParser implements Callable<Integer> {
     @Option(names = "-f", description = "Добавить полную статистику", defaultValue = "false")
     private Boolean isFullStats;
 
-
     @Override
     public Integer call() {
         try {
@@ -47,18 +46,12 @@ public class DataParser implements Callable<Integer> {
                         }
                         return new BufferedReader(new InputStreamReader(is)).lines();
                     }).toList();
-            DataFilter test = new DataFilter(allLines, destinationPath, filePrefix, isRewriteFile, isShortStats, isFullStats);
-            System.out.print(allLines);
+            DataFilter datafilter = new DataFilter(allLines,destinationPath,filePrefix,isRewriteFile,isShortStats,isFullStats);
+            datafilter.dataSort();
+
         } catch (NullPointerException e) {
             System.err.println(e.getMessage());
         }
-
-//        System.out.println(destinationPath + " isStandardPath");
-//        System.out.println(filePrefix + " isPrefix");
-//        System.out.println(isRewriteFile + " isRewriteFile");
-//        System.out.println(isShortStats + " isShortStats");
-//        System.out.println(isFullStats + " isFullStats");
-//        System.out.print(dataFiles);
         return 0;
     }
 
