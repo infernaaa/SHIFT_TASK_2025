@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class DataParser {
-    public List<String> parse(List<File> dataFiles){
+    public List<String> parse(List<File> dataFiles) {
         try {
             List<String> allLines = dataFiles.stream()
                     .flatMap(file -> {

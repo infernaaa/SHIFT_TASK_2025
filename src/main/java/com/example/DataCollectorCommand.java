@@ -39,6 +39,7 @@ public class DataCollectorCommand implements Callable<Integer> {
                 isShortStats,
                 isFullStats
         );
+
         new DataProcessor().process(config);
         return 0;
     }

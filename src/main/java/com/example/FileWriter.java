@@ -26,8 +26,11 @@ public class FileWriter {
             Path filePath = path.isEmpty() ? Path.of(filename) : Path.of(path, filename);
 
             try {
-                Files.write(filePath, lines, strategy);
-                System.out.println("Данные добавлены в файл: " + filePath);
+                if (!lines.isEmpty()) {
+                    Files.write(filePath, lines, strategy);
+                    System.out.println("Данные добавлены в файл: " + filePath);
+                }
+
             } catch (IOException e) {
                 System.err.println("Ошибка записи в файл " + filename + ": " + e.getMessage());
             }
